@@ -23,3 +23,6 @@
 .DS_Store
 node_modules
 *.nginx.conf
+
+/public/*
+!/public/.keep

@@ -8,18 +8,30 @@ import * as ActionCable from 'actioncable';
 })
 
 export class IndexComponent {
+
+  room;
+
   constructor() {
     // when component class instance is created
     let cable = ActionCable.createConsumer();
-    cable.subscriptions.create({
-      channel: "chat_channel",
+    this.room = cable.subscriptions.create({
+      channel: "ChatChannel",
       room: "Best Room"
     }, {
+      connected: () => {},
+      disconnected: () => {},
       received: data => {
         console.log(data);
+      },
+      ping: function(data) {
+        this.perform('ping', {message: data});
       }
     });
     console.log(cable);
+  }
+
+  ping() {
+    this.room.ping({data: 'ping'});
   }
 
   ngOnChanges() {
