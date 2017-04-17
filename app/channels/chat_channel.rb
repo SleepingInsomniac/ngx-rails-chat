@@ -11,6 +11,7 @@ class ChatChannel < ApplicationCable::Channel
   def send_message(client_data)
     ActionCable.server.broadcast(current_room, {
       text: client_data['text'],
+      server_timestamp: Time.now,
       user: { username: current_user.username }
     })
   end

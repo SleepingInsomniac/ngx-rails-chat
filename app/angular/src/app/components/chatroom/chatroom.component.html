@@ -1,6 +1,8 @@
 <ul class="messages">
   <li *ngFor="let message of messages">
-    <h6>{{ message.user.username }}</h6>
+    <div>
+      {{ message.user.username }}<span *ngIf="message.server_timestamp"> @ {{ message.server_timestamp }}</span>
+    </div>
     <p>{{ message.text }}</p>
   </li>
 </ul>
