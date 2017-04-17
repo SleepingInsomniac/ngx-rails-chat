@@ -22,6 +22,10 @@ export class AuthService {
     this.User = UserService;
   }
 
+  get token() {
+    return window.localStorage.getItem('auth_token');
+  }
+
   get loggedIn() {
     return !!window.localStorage.getItem('auth_token');
   }

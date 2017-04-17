@@ -1,0 +1,9 @@
+<span>{{ messages.length }}</span>
+<ul class="messages">
+  <li *ngFor="let message of messages">
+    <pre>{{ message | json }}</pre>
+  </li>
+</ul>
+
+<textarea [(ngModel)]="message"></textarea>
+<button (click)="sendMessage()">Send</button>
