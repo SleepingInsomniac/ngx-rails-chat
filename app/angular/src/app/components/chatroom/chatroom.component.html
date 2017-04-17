@@ -1,9 +1,9 @@
-<span>{{ messages.length }}</span>
 <ul class="messages">
   <li *ngFor="let message of messages">
-    <pre>{{ message | json }}</pre>
+    <h6>{{ message.user.username }}</h6>
+    <p>{{ message.text }}</p>
   </li>
 </ul>
 
-<textarea [(ngModel)]="message"></textarea>
+<textarea [(ngModel)]="messageText" (keypress)="keypress($event)"></textarea>
 <button (click)="sendMessage()">Send</button>

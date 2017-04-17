@@ -13,7 +13,7 @@ export class ChatroomComponent {
   CableService: CableService
   room;
   messages = [];
-  message;
+  messageText;
 
   constructor(Auth: AuthService, CableService: CableService) {
     this.Auth = Auth;
@@ -26,10 +26,10 @@ export class ChatroomComponent {
       room: "lobby"
     }, {
       connected: data => {
-        console.log(data);
+        this.messages.push({text: 'Welcome', user: { username: 'Info' }});
       },
       disconnected: data => {
-        console.log(data);
+        // console.log(data);
       },
       received: data => {
         console.log(data);
@@ -42,19 +42,21 @@ export class ChatroomComponent {
   }
 
   ngOnInit() {
-    console.log('hello');
-    if (this.Auth.loggedIn) {
+    this.Auth.afterLogin(() => {
       this.subscribeRoom();
-    } else {
-      this.Auth.loginSuccess.subscribe(() => {
-        this.subscribeRoom();
-      });
-    }
+    });
   }
 
   sendMessage() {
-    this.room.sendMessage({message: this.message});
-    this.message = '';
+    this.room.sendMessage({ text: this.messageText });
+    this.messageText = null;
+  }
+
+  keypress(event) {
+    if (event.which == '13') {
+      this.sendMessage();
+      event.preventDefault();
+    }
   }
 
 }

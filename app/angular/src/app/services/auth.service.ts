@@ -30,6 +30,10 @@ export class AuthService {
     return !!window.localStorage.getItem('auth_token');
   }
 
+  afterLogin(callback) {
+    this.loggedIn ? callback() : this.loginSuccess.subscribe(() => callback());
+  }
+
   login(identity, password) {
     let request = this.http.post('api/authentication', {
       authentication: {
