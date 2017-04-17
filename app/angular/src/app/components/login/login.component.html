@@ -4,15 +4,18 @@
   </div>
   <button (click)="logout()">Log out</button>
 </div>
-<form *ngIf="!Auth.loggedIn">
-  <label>
-    <div class="inner-label">Username</div>
-    <input name="username" [(ngModel)]="username" placeholder="user@example.com">
-  </label>
-  <label>
-    <div class="inner-label">Password</div>
-    <input name="password" type="password" [(ngModel)]="password" placeholder="password">
-  </label>
+<div *ngIf="!Auth.loggedIn">
+  <form>
+    <label>
+      <div class="inner-label">Username</div>
+      <input name="username" [(ngModel)]="username" placeholder="Username">
+    </label>
+    <label>
+      <div class="inner-label">Password</div>
+      <input name="password" type="password" [(ngModel)]="password" placeholder="password">
+    </label>
 
-  <button type="submit" (click)="login(username, password)">Log in</button>
-</form>
+    <button type="submit" (click)="login(username, password)">Log in</button>
+  </form>
+  <a routerLink="/signup">Create an account</a>
+</div>

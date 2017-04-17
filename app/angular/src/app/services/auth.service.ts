@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HTTPService } from './http.service';
 import { UserService } from './user.service';
 import { User } from '../models/user';
+import { MemoryStorage } from '../lib/memory-storage';
 import 'rxjs/add/operator/finally';
 
 @Injectable()
@@ -9,6 +10,8 @@ export class AuthService {
   
   http: HTTPService;
   User: UserService;
+
+  storage;
 
   _currentUser: User;
   loading = false;
@@ -20,14 +23,25 @@ export class AuthService {
   constructor(httpService: HTTPService, UserService: UserService) {
     this.http = httpService;
     this.User = UserService;
+    this.initLocalStorage();
+  }
+
+  initLocalStorage() {
+    this.storage = window.localStorage;
+    try {
+      window.localStorage.setItem('availability', 'true');
+      window.localStorage.removeItem('availability');
+    } catch(e) {
+      this.storage = new MemoryStorage();
+    }
   }
 
   get token() {
-    return window.localStorage.getItem('auth_token');
+    return this.storage.getItem('auth_token');
   }
 
   get loggedIn() {
-    return !!window.localStorage.getItem('auth_token');
+    return !!this.storage.getItem('auth_token');
   }
 
   afterLogin(callback) {
@@ -43,7 +57,7 @@ export class AuthService {
     });
     request.subscribe(response => {
       if (response.auth_token) {
-        window.localStorage.setItem('auth_token', response.auth_token);
+        this.storage.setItem('auth_token', response.auth_token);
         this._currentUser = new User(response.user);
         this.loginSuccess.emit();
       } else {
@@ -63,7 +77,7 @@ export class AuthService {
     request.subscribe(
       r => {
         this.logoutSuccess.emit();
-        window.localStorage.removeItem('auth_token');
+        this.storage.removeItem('auth_token');
         this._currentUser = null;
       },
       r => this.logoutFailure.emit(),

@@ -26,7 +26,7 @@ export class ChatroomComponent {
       room: "lobby"
     }, {
       connected: data => {
-        this.messages.push({text: 'Welcome', user: { username: 'Info' }});
+        this.messages.push({ text: 'Welcome', user: { username: 'Info' }});
       },
       disconnected: data => {
         // console.log(data);
@@ -39,6 +39,7 @@ export class ChatroomComponent {
         this.perform('send_message', data);
       }
     });
+    console.log('room: ', this.room);
   }
 
   ngOnInit() {

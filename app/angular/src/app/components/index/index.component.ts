@@ -1,4 +1,5 @@
-import {Component, Input} from "@angular/core";
+import { Component, Input } from "@angular/core";
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: "lx-index",
@@ -8,8 +9,10 @@ import {Component, Input} from "@angular/core";
 
 export class IndexComponent {
 
-  constructor() {
-    // when component class instance is created
+  Auth: AuthService;
+
+  constructor(Auth: AuthService) {
+    this.Auth = Auth;
   }
 
   ngOnChanges() {

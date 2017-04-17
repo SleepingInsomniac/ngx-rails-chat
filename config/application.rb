@@ -27,5 +27,21 @@ module Chat
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.middleware.insert(0, 'Rack::Rewrite') do
+      rewrite //, 'index.html', if: Proc.new { |rack_env|
+        case rack_env['PATH_INFO']
+        when /^\/api/i
+          false
+        when /^\/cable/i
+          false
+        when /\.[a-z]+$/i
+          false
+        else
+          true
+        end
+      }
+    end
+
   end
 end

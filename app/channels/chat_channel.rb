@@ -12,7 +12,7 @@ class ChatChannel < ApplicationCable::Channel
     ActionCable.server.broadcast(current_room, {
       text: client_data['text'],
       server_timestamp: Time.now,
-      user: { username: current_user.username }
+      user: { id: current_user.id, username: current_user.username }
     })
   end
 

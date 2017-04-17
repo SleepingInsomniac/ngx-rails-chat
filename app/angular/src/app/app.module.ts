@@ -13,13 +13,15 @@ import { AppComponent } from './components/app/app.component';
 import { IndexComponent } from './components/index/index.component';
 import { LoginComponent } from './components/login/login.component';
 import { ChatroomComponent } from './components/chatroom/chatroom.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
     LoginComponent,
-    ChatroomComponent
+    ChatroomComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
