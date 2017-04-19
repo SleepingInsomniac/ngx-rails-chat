@@ -1,10 +1,10 @@
 <ul class="messages" #messageList (scroll)="listScroll($event)">
-  <li *ngFor="let message of messages" [attr.data-id]="message.user.id">
-    <aside>
-      <span>{{ message.user.username }}</span>
-      <span *ngIf="message.server_timestamp">@ {{ message.server_timestamp }}</span>
-    </aside>
-    <p>{{ message.text }}</p>
+  <li *ngFor="let message of messages" [class.divider]="message.divider">
+    <div class="username">{{ message.user.username }}</div>
+    <div class="message" [style.background-color]="'rgb('+message.user.color+')'">
+      <div class="text">{{ message.text }}</div>
+      <aside class="info">@ {{ message.server_timestamp | date:'jms' }}</aside>
+    </div>
   </li>
 </ul>
 

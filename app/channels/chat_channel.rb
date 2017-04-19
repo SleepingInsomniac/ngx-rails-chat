@@ -12,7 +12,7 @@ class ChatChannel < ApplicationCable::Channel
     ActionCable.server.broadcast(current_room, {
       text: client_data['text'],
       server_timestamp: Time.now,
-      user: { id: current_user.id, username: current_user.username }
+      user: { id: current_user.id, username: current_user.username, color: current_user.color }
     })
   end
 
@@ -23,9 +23,7 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def server_user
-    {
-      username: 'Server'
-    }
+    { username: 'Server', color: '200,200,200' }
   end
 
 end

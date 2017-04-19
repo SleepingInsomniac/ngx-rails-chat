@@ -5,4 +5,5 @@ export class User extends ModelBase {
   email;
   password;
   last_login: Date;
+  color;
 }

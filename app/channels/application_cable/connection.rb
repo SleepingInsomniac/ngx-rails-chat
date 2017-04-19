@@ -13,7 +13,7 @@ module ApplicationCable
     end
 
     private
-    
+
     def find_verified_user(auth_token)
       if @auth_params = JsonWebToken.decode(auth_token)
         if Time.now > Time.at(@auth_params[:exp])

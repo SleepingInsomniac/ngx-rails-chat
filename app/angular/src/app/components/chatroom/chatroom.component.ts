@@ -40,19 +40,41 @@ export class ChatroomComponent {
         this.messages.push({ text: 'You were disconnected', user: this.infoUser});
       },
       received: data => {
-        this.messages.push(data);
-        if (this.stickyScroll) {
-          setTimeout(_ => {
-            let listElement = this.messageList.nativeElement;
-            listElement.scrollTop = listElement.scrollHeight;
-          }, 1);
-        }
+        console.log(this.messages);
+        this.addMessage(data);
       },
       sendMessage: function(data) {
         this.perform('send_message', data);
       }
     });
-    // console.log('room: ', this.room);
+
+    this.Auth.logoutSuccess.subscribe(() => {
+      this.room.unsubscribe();
+    });
+  }
+
+  addMessage(data) {
+    if (data.server_timestamp) {
+      data.server_timestamp = new Date(data.server_timestamp);
+    } else {
+      data.server_timestamp = new Date();
+    }
+    data.divider = true;
+    if (this.messages.length > 0) {
+      let lastMessage = this.messages[this.messages.length - 1];
+      if (lastMessage.user.id !== data.user.id) {
+        data.divider = true;
+      } else {
+        data.divider = false;
+      }
+    }
+    this.messages.push(data);
+    if (this.stickyScroll) {
+      setTimeout(_ => {
+        let listElement = this.messageList.nativeElement;
+        listElement.scrollTop = listElement.scrollHeight;
+      }, 1);
+    }
   }
 
   ngOnInit() {

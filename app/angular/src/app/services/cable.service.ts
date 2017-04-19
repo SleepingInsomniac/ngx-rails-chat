@@ -21,9 +21,13 @@ export class CableService {
   
   initalizeCable() {
     let protocol = window.location.protocol == 'https:' ? 'wss:' : 'ws:';
-    this.cable = ActionCable.createConsumer(
-      `${protocol}//${window.location.host}/cable?auth_token=${this.Auth.token}`
-    );
+
+    this.Auth.afterLogin(() => {
+      this.cable = ActionCable.createConsumer(
+        `${protocol}//${window.location.host}/cable?auth_token=${this.Auth.token}`
+      );
+    });
+
   }
 
 }

@@ -12,10 +12,54 @@
   overflow-y: scroll;
 
   li {
-    margin: 5px;
+    display: flex;
+
+    .username {
+      flex: 0 1 auto;
+      text-align: right;
+    }
+
+    .message {
+      flex: 10 1 auto;
+    }
+  }
+
+  li.divider {
+    margin-top: 10px;
+
+    .message {
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+  }
+
+  li:not(.divider) {
+    .username {
+      opacity: 0;
+    }
+  }
+
+  .username {
+    padding: 0.3em 0.6em;
+  }
+
+  .message {
     padding: 0.3em 0.6em;
     background-color: white;
+    display: flex;
+    align-items: center;
+    
+    .text {
+      flex: 1 1 auto;
+    }
+
+    .info {
+      flex: 0 0 auto;
+      font-size: 0.8em;
+      color: rgba(#000,0.3);
+    }
   }
+
 }
 
 .chat-input {
