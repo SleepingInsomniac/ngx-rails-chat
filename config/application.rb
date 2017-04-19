@@ -29,7 +29,7 @@ module Chat
     config.api_only = true
 
     config.middleware.insert(0, 'Rack::Rewrite') do
-      rewrite //, 'index.html', if: Proc.new { |rack_env|
+      rewrite /(\?.*)?/, '/$1', if: Proc.new { |rack_env|
         case rack_env['PATH_INFO']
         when /^\/api/i
           false

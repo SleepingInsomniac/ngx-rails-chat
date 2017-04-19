@@ -1,11 +1,14 @@
-<ul class="messages">
-  <li *ngFor="let message of messages">
-    <div>
-      {{ message.user.username }}<span *ngIf="message.server_timestamp"> @ {{ message.server_timestamp }}</span>
-    </div>
+<ul class="messages" #messageList (scroll)="listScroll($event)">
+  <li *ngFor="let message of messages" [attr.data-id]="message.user.id">
+    <aside>
+      <span>{{ message.user.username }}</span>
+      <span *ngIf="message.server_timestamp">@ {{ message.server_timestamp }}</span>
+    </aside>
     <p>{{ message.text }}</p>
   </li>
 </ul>
 
-<textarea [(ngModel)]="messageText" (keypress)="keypress($event)"></textarea>
-<button (click)="sendMessage()">Send</button>
+<div class="chat-input">
+  <textarea [(ngModel)]="messageText" (keypress)="keypress($event)"></textarea>
+  <button (click)="sendMessage()">Send</button>
+</div>

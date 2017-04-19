@@ -1,21 +1,27 @@
 <div *ngIf="Auth.loggedIn">
-  <div *ngIf="Auth.currentUser">
-    {{ Auth.currentUser.username }}
-  </div>
+  <span class="username" *ngIf="Auth.currentUser">{{ Auth.currentUser.username }}</span>
   <button (click)="logout()">Log out</button>
 </div>
 <div *ngIf="!Auth.loggedIn">
-  <form>
-    <label>
-      <div class="inner-label">Username</div>
-      <input name="username" [(ngModel)]="username" placeholder="Username">
-    </label>
-    <label>
-      <div class="inner-label">Password</div>
-      <input name="password" type="password" [(ngModel)]="password" placeholder="password">
-    </label>
+  <form class="login-form">
+    
+    <div>
+      <label class="input-wrapper">
+        <div class="inner-label">Username</div>
+        <input name="username" [(ngModel)]="username" placeholder="Username">
+      </label>
+    </div>
 
-    <button type="submit" (click)="login(username, password)">Log in</button>
+    <div>
+      <label class="input-wrapper">
+        <div class="inner-label">Password</div>
+        <input name="password" type="password" [(ngModel)]="password" placeholder="password">
+      </label>
+    </div>
+
+    <div>
+      <button type="submit" (click)="login(username, password)">Log in</button>
+      <a routerLink="/signup">Create an account</a>
+    </div>
   </form>
-  <a routerLink="/signup">Create an account</a>
 </div>

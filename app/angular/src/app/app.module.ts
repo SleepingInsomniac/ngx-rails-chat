@@ -14,6 +14,7 @@ import { IndexComponent } from './components/index/index.component';
 import { LoginComponent } from './components/login/login.component';
 import { ChatroomComponent } from './components/chatroom/chatroom.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SignupComponent } from './components/signup/signup.component';
     IndexComponent,
     LoginComponent,
     ChatroomComponent,
-    SignupComponent
+    SignupComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

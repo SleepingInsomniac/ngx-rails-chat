@@ -1,4 +1,5 @@
-lx-index {
-  display: block;
-  border: 1px dashed red;
+:host {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
 }

@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.messages {
+  margin: 0;
+  padding: 10px;
+  list-style-type: none;
+  flex: 5 0 80%;
+  overflow-y: scroll;
+
+  li {
+    margin: 5px;
+    padding: 0.3em 0.6em;
+    background-color: white;
+  }
+}
+
+.chat-input {
+  flex: 1 0 20%;
+  display: flex;
+
+  textarea {
+    flex: 1 1 auto;
+    font-size: 1.6em;
+  }
+}
