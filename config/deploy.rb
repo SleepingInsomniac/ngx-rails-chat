@@ -2,7 +2,7 @@
 lock "3.8.0"
 
 set :application, "chat"
-set :repo_url, "git@git.pixelfaucet.com:alex/chat.git"
+set :repo_url, "git@github.com:SleepingInsomniac/ngx-rails-chat.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
