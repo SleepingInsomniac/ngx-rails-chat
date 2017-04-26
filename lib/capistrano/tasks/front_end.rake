@@ -11,8 +11,10 @@ namespace :deploy do
     task :upload, %i[build] do
       user = fetch(:user)
       on roles(:app) do |host|
-        execute "mkdir -p #{release_path}/public/angular"
-        execute "rsync -azvh public/angular/ #{release_path}/public/angular"
+        execute "mkdir -p #{release_path}/public"
+        Dir.glob('public/**/*').each do |file|
+          upload! file, "#{release_path}/public/#{File.basename file}"
+        end
       end
     end
     before 'deploy:frontend:upload', 'deploy:frontend:build'
