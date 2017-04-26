@@ -3,8 +3,8 @@ namespace :deploy do
     task :build do
       user = fetch(:user)
       on roles(:app) do |host|
-        system "yarn"
-        system "yarn run build"
+        system "cd app/angular && yarn"
+        system "cd app/angular && yarn run build"
       end
     end
 
