@@ -21,7 +21,7 @@ set :deploy_to, "/var/www/chat"
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml", "config/secrets.yml", 'config/cable.yml', 'db/production.sqlite3', 'config/chat.nginx.conf'
+append :linked_files, "config/database.yml", "config/secrets.yml", 'config/cable.yml', 'db/production.sqlite3', 'config/nginx.conf'
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", 'public/uploads', 'public/files'

@@ -1,4 +1,4 @@
-server 'pixelfaucet.com', user: 'alex', roles: %w{app db web}
+server 'chat.alexc.link', user: 'alex', roles: %w{app db web}
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
