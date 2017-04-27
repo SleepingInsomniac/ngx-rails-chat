@@ -3,7 +3,7 @@
   <button (click)="logout()">Log out</button>
 </div>
 <div *ngIf="!Auth.loggedIn">
-  <form class="login-form">
+  <form name="login" class="login-form" (submit)="login(username, password)">
     
     <div>
       <label class="input-wrapper">
@@ -32,7 +32,7 @@
     </div>
 
     <div>
-      <button type="submit" (click)="login(username, password)">Log in</button>
+      <button type="submit">Log in</button>
       <a routerLink="/signup">Create an account</a>
     </div>
   </form>
