@@ -3,7 +3,7 @@
     <div class="username">{{ message.user.username }}</div>
     <div class="message" [style.background-color]="'rgb('+message.user.color+')'">
       <div class="text">{{ message.text }}</div>
-      <aside class="info">@ {{ message.server_timestamp | date:'jms' }}</aside>
+      <aside class="info">@ {{ message.server_timestamp | dateformat:'h:mm:ss a' }}</aside>
     </div>
   </li>
 </ul>

@@ -1,17 +1,35 @@
 <form class="signup-form">
   <label class="required">
     <div class="inner-label">Username</div>
-    <input type="text" name="username" [(ngModel)]="username" placeholder="Usename">
+    <input
+        type="text"
+        name="username"
+        autocorrect="off"
+        autocapitalize="none"
+        [(ngModel)]="username"
+        placeholder="Usename">
   </label>
 
   <label class="optional">
     <div class="inner-label">Email</div>
-    <input type="text" name="email" [(ngModel)]="email" placeholder="username@example.com">
+    <input
+        type="email"
+        name="email"
+        autocorrect="off"
+        autocapitalize="none"
+        [(ngModel)]="email"
+        placeholder="username@example.com">
   </label>
 
   <label class="required">
     <div class="inner-label">Password</div>
-    <input type="password" name="password" [(ngModel)]="password" placeholder="Password">
+    <input
+        type="password"
+        name="password"
+        autocorrect="off"
+        autocapitalize="none"
+        [(ngModel)]="password"
+        placeholder="Password">
   </label>
 
   <button type="submit" (click)="signup()">Log in</button>

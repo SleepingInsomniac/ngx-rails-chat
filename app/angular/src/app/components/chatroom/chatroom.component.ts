@@ -40,7 +40,6 @@ export class ChatroomComponent {
         this.messages.push({ text: 'You were disconnected', user: this.infoUser});
       },
       received: data => {
-        console.log(this.messages);
         this.addMessage(data);
       },
       sendMessage: function(data) {

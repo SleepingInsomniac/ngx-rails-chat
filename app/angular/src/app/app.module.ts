@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ChatroomComponent } from './components/chatroom/chatroom.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HeaderComponent } from './components/header/header.component';
+import { DateformatPipe } from './pipes/dateformat.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HeaderComponent } from './components/header/header.component';
     LoginComponent,
     ChatroomComponent,
     SignupComponent,
-    HeaderComponent
+    HeaderComponent,
+    DateformatPipe
   ],
   imports: [
     BrowserModule,
