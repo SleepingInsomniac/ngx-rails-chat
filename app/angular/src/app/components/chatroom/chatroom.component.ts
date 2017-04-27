@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CableService } from '../../services/cable.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'lx-chatroom',
@@ -12,16 +13,18 @@ export class ChatroomComponent {
   Auth: AuthService;
   CableService: CableService
   room;
+  @Input() roomName = 'lobby';
   messages = [];
   messageText;
   stickyScroll = true;
 
-  infoUser = {
+  infoUser = new User({
     id: 0,
     username: 'Info'
-  };
+  });
 
   @ViewChild('messageList') messageList;
+  @ViewChild('messageTextArea') messageTextArea;
 
   constructor(Auth: AuthService, CableService: CableService) {
     this.Auth = Auth;
@@ -31,24 +34,25 @@ export class ChatroomComponent {
   subscribeRoom() {
     this.room = this.CableService.cable.subscriptions.create({
       channel: "ChatChannel",
-      room: "lobby"
+      room: this.roomName,
+      auth_token: this.Auth.token
     }, {
-      connected: data => {
-        this.messages.push({ text: 'Welcome', user: this.infoUser});
-      },
-      disconnected: data => {
-        this.messages.push({ text: 'You were disconnected', user: this.infoUser});
-      },
-      received: data => {
-        this.addMessage(data);
-      },
+      connected: data => this.messages.push({ text: 'Connected', user: this.infoUser }),
+      disconnected: data => this.messages.push({ text: 'You were disconnected', user: this.infoUser }),
+      received: data => this.addMessage(data),
       sendMessage: function(data) {
         this.perform('send_message', data);
+      },
+      login: function(data) {
+        this.perform('log_in', data);
+      },
+      logout: function(data) {
+        this.perform('log_out', data);
       }
     });
 
-    this.Auth.logoutSuccess.subscribe(() => {
-      this.room.unsubscribe();
+    this.Auth.afterLogin(() => {
+      this.room.login({ auth_token: this.Auth.token });
     });
   }
 
@@ -77,15 +81,18 @@ export class ChatroomComponent {
   }
 
   ngOnInit() {
-    this.Auth.afterLogin(() => {
-      this.subscribeRoom();
+    this.messageTextArea.nativeElement.focus();
+    this.Auth.loginSuccess.subscribe(() => {
+      this.messageTextArea.nativeElement.focus();
     });
+    this.subscribeRoom();
   }
 
   sendMessage() {
     this.stickyScroll = true;
     this.room.sendMessage({ text: this.messageText });
     this.messageText = null;
+    this.messageTextArea.nativeElement.focus();
   }
 
   keypress(event) {

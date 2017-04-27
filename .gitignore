@@ -26,3 +26,5 @@ node_modules
 
 /public/*
 !/public/.keep
+
+admin_password

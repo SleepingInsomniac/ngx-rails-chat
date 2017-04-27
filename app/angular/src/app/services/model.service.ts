@@ -12,6 +12,7 @@ export class ModelService {
   http: HTTPService;
   model; // this gets set in subclass
   singular;
+  ClassType;
 
   constructor(http: HTTPService) {
     this.http = http;
@@ -51,8 +52,18 @@ export class ModelService {
   }
 
   finalizeRequest(req) {
-    // overide this to format requests
-    return req;
+    // overide this to format specific requests
+    if (this.ClassType) {
+      return req.map(data => {
+        if (data instanceof Array) {
+          return data.map(d => new this.ClassType(d));
+        } else {
+          return new this.ClassType(data);
+        }
+      });
+    } else {
+      return req;
+    }
   }
 
 }

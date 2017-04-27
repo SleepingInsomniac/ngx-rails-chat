@@ -1,6 +1,7 @@
 class ChatChannel < ApplicationCable::Channel
   def subscribed
     stream_from current_room
+    log_in(params)
     ActionCable.server.broadcast current_room, { text: "#{current_user.username} has entered the room", user: server_user }
   end
 
@@ -23,7 +24,7 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def server_user
-    { username: 'Server', color: '200,200,200' }
+    @server_user ||= User.new username: 'Server', color: '200,200,200'
   end
 
 end

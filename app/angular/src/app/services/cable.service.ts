@@ -7,27 +7,19 @@ export class CableService {
 
   Auth: AuthService;
   cable;
+  userChannel;
 
   constructor(Auth: AuthService) {
     this.Auth = Auth;
-    if (this.Auth.loggedIn) {
-      this.initalizeCable();
-    } else {
-      this.Auth.loginSuccess.subscribe(() => {
-        this.initalizeCable();
-      });
-    }
+    this.initalizeCable();
   }
   
   initalizeCable() {
     let protocol = window.location.protocol == 'https:' ? 'wss:' : 'ws:';
 
-    this.Auth.afterLogin(() => {
-      this.cable = ActionCable.createConsumer(
-        `${protocol}//${window.location.host}/cable?auth_token=${this.Auth.token}`
-      );
-    });
-
+    this.cable = ActionCable.createConsumer(
+      `${protocol}//${window.location.host}/cable`
+    );
   }
 
 }

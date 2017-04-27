@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
+import { CableService } from '../../services/cable.service';
 
 @Component({
   selector: 'lx-login',
@@ -11,10 +12,12 @@ export class LoginComponent {
 
   Auth: AuthService;
   User: UserService;
+  Cable: CableService;
 
-  constructor(Auth: AuthService, User: UserService) {
+  constructor(Auth: AuthService, User: UserService, Cable: CableService) {
     this.Auth = Auth;
     this.User = User;
+    this.Cable = Cable;
 
     this.Auth.loginSuccess.subscribe(() => {
       console.log(this.Auth.currentUser);

@@ -48,6 +48,10 @@ export class AuthService {
     this.loggedIn ? callback() : this.loginSuccess.subscribe(() => callback());
   }
 
+  afterLogout(callback) {
+    this.logoutSuccess.subscribe(() => callback());
+  }
+
   login(identity, password) {
     let request = this.http.post('api/authentication', {
       authentication: {

@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { AuthService } from '../../services/auth.service';
+import { RoomService } from '../../services/room.service';
 
 @Component({
   selector: "lx-index",
@@ -10,9 +11,25 @@ import { AuthService } from '../../services/auth.service';
 export class IndexComponent {
 
   Auth: AuthService;
+  Room: RoomService;
 
-  constructor(Auth: AuthService) {
+  rooms = [];
+  loading = {};
+
+  constructor(Auth: AuthService, Room: RoomService) {
     this.Auth = Auth;
+    this.Room = Room;
+    this.loadRooms();
+  }
+
+  loadRooms() {
+    this.loading['rooms'] = true;
+    this.Room.all()
+      .finally(() => this.loading['rooms'] = false)
+      .subscribe(
+        rooms => this.rooms = rooms,
+        err => this.loading['rooms'] = false
+      );
   }
 
   ngOnChanges() {

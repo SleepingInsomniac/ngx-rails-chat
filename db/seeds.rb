@@ -6,6 +6,20 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-unless User.find_by username: 'alex'
-  alex = User.create(username: 'alex', password: 'aoeusnth', email: 'alexclink@gmail.com')
+unless User.find_by username: 'admin'
+  password = SecureRandom.hex(16)
+  if admin = User.create(username: 'admin', password: password)
+    puts "user: admin, password: #{password}"
+    File.open('admin_password', 'w') {|f| f.write(password) }
+  else
+    puts "Could not create admin user"
+  end
+end
+
+unless Room.find_by name: 'lobby'
+  if lobby = Room.create(name: 'lobby')
+    puts "Lobby created"
+  else
+    puts "Could not create lobby"
+  end
 end

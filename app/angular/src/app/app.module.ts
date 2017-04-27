@@ -7,6 +7,7 @@ import { HTTPService } from './services/http.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { CableService } from './services/cable.service';
+import { RoomService } from './services/room.service';
 
 import { AppRoutingModule } from './routing/app-routing.module';
 import { AppComponent } from './components/app/app.component';
@@ -37,7 +38,8 @@ import { DateformatPipe } from './pipes/dateformat.pipe';
     HTTPService,
     AuthService,
     UserService,
-    CableService
+    CableService,
+    RoomService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,17 +1,27 @@
+@keyframes messageAppear {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+}
+
 :host {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+  justify-content: flex-end;
 }
 
 .messages {
-  margin: 0;
+  margin: 10px 0;
   padding: 10px;
   list-style-type: none;
   flex: 5 0 80%;
   overflow-y: scroll;
 
   li {
+    flex: 0 0 auto;
     display: flex;
 
     .username {
@@ -48,6 +58,8 @@
     background-color: white;
     display: flex;
     align-items: center;
+    transform-origin: left;
+    animation: messageAppear 0.3s ease-in 1 forwards;
     
     .text {
       flex: 1 1 auto;
