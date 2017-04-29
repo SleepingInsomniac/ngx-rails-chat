@@ -62,6 +62,7 @@ export class ChatroomComponent {
     } else {
       data.server_timestamp = new Date();
     }
+    data.textColor = this.messageColor(data.user.color);
     data.divider = true;
     if (this.messages.length > 0) {
       let lastMessage = this.messages[this.messages.length - 1];
@@ -77,6 +78,17 @@ export class ChatroomComponent {
         let listElement = this.messageList.nativeElement;
         listElement.scrollTop = listElement.scrollHeight;
       }, 1);
+    }
+  }
+
+  messageColor(colorString) {
+    if (!colorString) return;
+    let [r,g,b] = colorString.split(',').map(i => parseInt(i));
+    let luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    if (luminance > 127.5) {
+      return '#000';
+    } else {
+      return '#FFF';
     }
   }
 

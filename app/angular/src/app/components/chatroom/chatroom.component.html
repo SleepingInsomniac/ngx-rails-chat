@@ -2,8 +2,12 @@
   <li *ngFor="let message of messages" [class.divider]="message.divider">
     <div class="username">{{ message.user.username }}</div>
     <div class="message" [style.background-color]="'rgb('+message.user.color+')'">
-      <div class="text">{{ message.text }}</div>
-      <aside class="info">@ {{ message.server_timestamp | dateformat:'h:mm:ss a' }}</aside>
+      <div class="text" [style.color]="message.textColor">
+        {{ message.text }}
+      </div>
+      <aside class="info">
+        @ {{ message.server_timestamp | dateformat:'h:mm:ss a' }}
+      </aside>
     </div>
   </li>
 </ul>
